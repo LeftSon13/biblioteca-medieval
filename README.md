@@ -153,3 +153,9 @@ Troque `1` pelos ids retornados nos seus cadastros. Se algum deles ainda estiver
 ## Decisão didática sobre detalhe
 
 O enunciado informa que cada livro possui um detalhe, mas não especifica os campos dele. Para tornar o cadastro utilizável, este projeto representa o detalhe com uma propriedade descricao. Essa propriedade é uma decisão de implementação, não um campo declarado literalmente no enunciado.
+
+## Material para entrega
+
+- [Orientação para entrega](LEIA-ME-DA-ENTREGA.md) — escopo, execução local e links públicos;
+- [Evidências da execução e prévias visuais](evidencias/README.md);
+- [Uso de IA e roteiro de aprendizagem](USO-DE-IA-E-APRENDIZAGEM.md).

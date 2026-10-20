@@ -1,0 +1,90 @@
+newman
+
+Biblioteca Medieval — UC4 Senac SC
+
+□ 1. Preparar categoria e autores
+└ Cadastrar categoria de teste
+  POST http://localhost:8080/api/categorias [201 Created, 224B, 55ms]
+  √  Categoria cadastrada (201)
+
+└ Listar categorias
+  GET http://localhost:8080/api/categorias [200 OK, 238B, 13ms]
+  √  Lista de categorias disponível (200)
+
+└ Cadastrar primeiro autor de teste
+  POST http://localhost:8080/api/autores [201 Created, 217B, 12ms]
+  √  Autora cadastrada (201)
+
+└ Cadastrar segundo autor de teste
+  POST http://localhost:8080/api/autores [201 Created, 216B, 11ms]
+  √  Autor cadastrado (201)
+
+└ Listar autores
+  GET http://localhost:8080/api/autores [200 OK, 254B, 11ms]
+  √  Lista de autores disponível (200)
+
+□ 2. CRUD do livro
+└ Cadastrar livro com detalhe, categoria e dois autores
+  POST http://localhost:8080/api/livros [201 Created, 504B, 30ms]
+  √  Livro cadastrado (201)
+
+└ Listar livros
+  GET http://localhost:8080/api/livros [200 OK, 494B, 17ms]
+  √  Lista de livros disponível (200)
+
+└ Buscar livro cadastrado pelo id
+  GET http://localhost:8080/api/livros/11 [200 OK, 499B, 13ms]
+  √  Livro encontrado (200)
+
+└ Atualizar livro
+  PUT http://localhost:8080/api/livros/11 [200 OK, 501B, 29ms]
+  √  Livro atualizado (200)
+
+□ 3. Relacionamentos e exclusões
+└ Não excluir categoria ainda usada pelo livro (409)
+  DELETE http://localhost:8080/api/categorias/13 [409 Conflict, 270B, 13ms]
+  √  Categoria protegida pelo relacionamento (409)
+
+└ Não excluir autor ainda ligado ao livro (409)
+  DELETE http://localhost:8080/api/autores/15 [409 Conflict, 267B, 13ms]
+  √  Autor protegido pelo relacionamento (409)
+
+└ Excluir livro (204)
+  DELETE http://localhost:8080/api/livros/11 [204 No Content, 112B, 15ms]
+  √  Livro excluído (204)
+
+└ Excluir categoria sem vínculos (204)
+  DELETE http://localhost:8080/api/categorias/13 [204 No Content, 112B, 21ms]
+  √  Categoria excluída (204)
+
+└ Excluir primeiro autor sem vínculos (204)
+  DELETE http://localhost:8080/api/autores/15 [204 No Content, 112B, 16ms]
+  √  Autora excluída (204)
+
+└ Excluir segundo autor sem vínculos (204)
+  DELETE http://localhost:8080/api/autores/16 [204 No Content, 112B, 26ms]
+  √  Autor excluído (204)
+
+└ Consultar livro inexistente (404)
+  GET http://localhost:8080/api/livros/999999999999 [404 Not Found, 130B, 9ms]
+  √  Id inexistente não é encontrado (404)
+
+┌─────────────────────────┬──────────────────┬──────────────────┐
+│                         │         executed │           failed │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│              iterations │                1 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│                requests │               16 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│            test-scripts │               16 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│      prerequest-scripts │               16 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│              assertions │               16 │                0 │
+├─────────────────────────┴──────────────────┴──────────────────┤
+│ total run duration: 1487ms                                    │
+├───────────────────────────────────────────────────────────────┤
+│ total data received: 1.88kB (approx)                          │
+├───────────────────────────────────────────────────────────────┤
+│ average response time: 19ms [min: 9ms, max: 55ms, s.d.: 11ms] │
+└───────────────────────────────────────────────────────────────┘

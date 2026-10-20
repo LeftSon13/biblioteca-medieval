@@ -149,3 +149,7 @@ Tente narrar este caminho sem olhar primeiro para as classes:
     Postman ou navegador → Controller → Service → Repository → PostgreSQL
 
 Na volta, o resultado percorre o caminho de retorno e é convertido para JSON.
+
+## Preparação para apresentar
+
+Antes de entregar, leia [LEIA-ME-DA-ENTREGA.md](LEIA-ME-DA-ENTREGA.md) e o registro de [uso de IA e aprendizagem](USO-DE-IA-E-APRENDIZAGEM.md). Tente responder às perguntas de revisão com suas próprias palavras.
