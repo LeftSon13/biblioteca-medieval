@@ -1,0 +1,318 @@
+{
+  "info": {
+    "_postman_id": "d129f54e-a0b6-4dcb-91b4-fbe35e83a9a2",
+    "name": "Biblioteca Medieval — UC4 Senac SC",
+    "description": "Coleção didática para testar a API da atividade da UC4 — Back-End de Projetos Web. Execute as requisições na ordem: cria categoria e autores, cria e atualiza o livro, verifica os bloqueios dos relacionamentos e encerra removendo os dados de teste.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Preparar categoria e autores",
+      "item": [
+        {
+          "name": "Cadastrar categoria de teste",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Fantasia da biblioteca {{sufixoExecucao}}\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/api/categorias",
+            "description": "Cria uma categoria que será associada ao livro desta execução."
+          },
+          "event": [{
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "pm.test(\"Categoria cadastrada (201)\", function () { pm.response.to.have.status(201); });",
+                "const categoria = pm.response.json();",
+                "pm.expect(categoria.id).to.exist;",
+                "pm.collectionVariables.set(\"categoriaId\", categoria.id);"
+              ]
+            }
+          }]
+        },
+        {
+          "name": "Listar categorias",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/categorias" },
+          "event": [{
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "pm.test(\"Lista de categorias disponível (200)\", function () { pm.response.to.have.status(200); });",
+                "pm.expect(pm.response.json()).to.be.an(\"array\");"
+              ]
+            }
+          }]
+        },
+        {
+          "name": "Cadastrar primeiro autor de teste",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Autora de teste {{sufixoExecucao}}\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/api/autores"
+          },
+          "event": [{
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "pm.test(\"Autora cadastrada (201)\", function () { pm.response.to.have.status(201); });",
+                "const autora = pm.response.json();",
+                "pm.expect(autora.id).to.exist;",
+                "pm.collectionVariables.set(\"autorId1\", autora.id);"
+              ]
+            }
+          }]
+        },
+        {
+          "name": "Cadastrar segundo autor de teste",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Autor de teste {{sufixoExecucao}}\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/api/autores"
+          },
+          "event": [{
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "pm.test(\"Autor cadastrado (201)\", function () { pm.response.to.have.status(201); });",
+                "const autor = pm.response.json();",
+                "pm.expect(autor.id).to.exist;",
+                "pm.collectionVariables.set(\"autorId2\", autor.id);"
+              ]
+            }
+          }]
+        },
+        {
+          "name": "Listar autores",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/autores" },
+          "event": [{
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "pm.test(\"Lista de autores disponível (200)\", function () { pm.response.to.have.status(200); });",
+                "pm.expect(pm.response.json()).to.be.an(\"array\");"
+              ]
+            }
+          }]
+        }
+      ]
+    },
+    {
+      "name": "2. CRUD do livro",
+      "item": [
+        {
+          "name": "Cadastrar livro com detalhe, categoria e dois autores",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"O livro do reino {{sufixoExecucao}}\",\n  \"preco\": 39.90,\n  \"quantidade\": 5,\n  \"categoriaId\": {{categoriaId}},\n  \"descricao\": \"Uma breve descrição do volume de exemplo.\",\n  \"autoresIds\": [{{autorId1}}, {{autorId2}}]\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/api/livros",
+            "description": "Demonstra o cadastro e os relacionamentos do enunciado."
+          },
+          "event": [{
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "pm.test(\"Livro cadastrado (201)\", function () { pm.response.to.have.status(201); });",
+                "const livro = pm.response.json();",
+                "pm.expect(livro.id).to.exist;",
+                "pm.collectionVariables.set(\"livroId\", livro.id);"
+              ]
+            }
+          }]
+        },
+        {
+          "name": "Listar livros",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/livros" },
+          "event": [{
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "pm.test(\"Lista de livros disponível (200)\", function () { pm.response.to.have.status(200); });",
+                "pm.expect(pm.response.json()).to.be.an(\"array\");"
+              ]
+            }
+          }]
+        },
+        {
+          "name": "Buscar livro cadastrado pelo id",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/livros/{{livroId}}" },
+          "event": [{
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "pm.test(\"Livro encontrado (200)\", function () { pm.response.to.have.status(200); });",
+                "pm.expect(pm.response.json().id).to.eql(Number(pm.collectionVariables.get(\"livroId\")));"
+              ]
+            }
+          }]
+        },
+        {
+          "name": "Atualizar livro",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Livro atualizado {{sufixoExecucao}}\",\n  \"preco\": 45.50,\n  \"quantidade\": 3,\n  \"categoriaId\": {{categoriaId}},\n  \"descricao\": \"Detalhe atualizado para demonstrar a operação PUT.\",\n  \"autoresIds\": [{{autorId1}}, {{autorId2}}]\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/api/livros/{{livroId}}"
+          },
+          "event": [{
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "pm.test(\"Livro atualizado (200)\", function () { pm.response.to.have.status(200); });",
+                "pm.expect(pm.response.json().titulo).to.include(\"Livro atualizado\");"
+              ]
+            }
+          }]
+        }
+      ]
+    },
+    {
+      "name": "3. Relacionamentos e exclusões",
+      "item": [
+        {
+          "name": "Não excluir categoria ainda usada pelo livro (409)",
+          "request": { "method": "DELETE", "url": "{{baseUrl}}/api/categorias/{{categoriaId}}" },
+          "event": [{
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "pm.test(\"Categoria protegida pelo relacionamento (409)\", function () { pm.response.to.have.status(409); });"
+              ]
+            }
+          }]
+        },
+        {
+          "name": "Não excluir autor ainda ligado ao livro (409)",
+          "request": { "method": "DELETE", "url": "{{baseUrl}}/api/autores/{{autorId1}}" },
+          "event": [{
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "pm.test(\"Autor protegido pelo relacionamento (409)\", function () { pm.response.to.have.status(409); });"
+              ]
+            }
+          }]
+        },
+        {
+          "name": "Excluir livro (204)",
+          "request": { "method": "DELETE", "url": "{{baseUrl}}/api/livros/{{livroId}}" },
+          "event": [{
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "pm.test(\"Livro excluído (204)\", function () { pm.response.to.have.status(204); });"
+              ]
+            }
+          }]
+        },
+        {
+          "name": "Excluir categoria sem vínculos (204)",
+          "request": { "method": "DELETE", "url": "{{baseUrl}}/api/categorias/{{categoriaId}}" },
+          "event": [{
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "pm.test(\"Categoria excluída (204)\", function () { pm.response.to.have.status(204); });"
+              ]
+            }
+          }]
+        },
+        {
+          "name": "Excluir primeiro autor sem vínculos (204)",
+          "request": { "method": "DELETE", "url": "{{baseUrl}}/api/autores/{{autorId1}}" },
+          "event": [{
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "pm.test(\"Autora excluída (204)\", function () { pm.response.to.have.status(204); });"
+              ]
+            }
+          }]
+        },
+        {
+          "name": "Excluir segundo autor sem vínculos (204)",
+          "request": { "method": "DELETE", "url": "{{baseUrl}}/api/autores/{{autorId2}}" },
+          "event": [{
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "pm.test(\"Autor excluído (204)\", function () { pm.response.to.have.status(204); });"
+              ]
+            }
+          }]
+        },
+        {
+          "name": "Consultar livro inexistente (404)",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/livros/999999999999" },
+          "event": [{
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "pm.test(\"Id inexistente não é encontrado (404)\", function () { pm.response.to.have.status(404); });"
+              ]
+            }
+          }]
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "if (!pm.collectionVariables.get(\"sufixoExecucao\")) {",
+          "  pm.collectionVariables.set(\"sufixoExecucao\", Date.now().toString());",
+          "}"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "sufixoExecucao", "value": "" },
+    { "key": "categoriaId", "value": "" },
+    { "key": "autorId1", "value": "" },
+    { "key": "autorId2", "value": "" },
+    { "key": "livroId", "value": "" }
+  ]
+}

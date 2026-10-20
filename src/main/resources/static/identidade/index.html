@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#211814">
+    <title>Biblioteca Medieval — propostas visuais</title>
+    <link rel="stylesheet" href="identidade.css">
+</head>
+<body data-tema="acolhedora">
+    <div class="aplicacao">
+        <aside class="barra-lateral" aria-label="Navegação da prévia">
+            <a class="marca" href="#inicio" aria-label="Biblioteca Medieval, início">
+                <span class="marca-simbolo" aria-hidden="true">▤</span>
+                <span class="marca-nome">BIBLIOTECA<br>MEDIEVAL</span>
+            </a>
+
+            <div class="rotulo-menu">NAVEGAÇÃO</div>
+            <nav class="menu">
+                <a class="item-menu ativo" href="#acervo"><span aria-hidden="true">▤</span> Acervo</a>
+                <a class="item-menu" href="#categorias"><span aria-hidden="true">✣</span> Categorias</a>
+                <a class="item-menu" href="#autores"><span aria-hidden="true">♙</span> Autores</a>
+            </nav>
+
+            <div class="nota-lateral">
+                <span class="nota-icone" aria-hidden="true">✦</span>
+                <div>
+                    <strong>UM ACERVO A DESCOBRIR</strong>
+                    <p>Livros, autores e histórias reunidos sob o mesmo teto.</p>
+                </div>
+            </div>
+
+            <div class="rodape-lateral">
+                <span class="selo-mini">PRÉVIA DE IDENTIDADE</span>
+                <p>Dados de exemplo<br>Interface ainda não conectada à API</p>
+            </div>
+        </aside>
+
+        <main class="conteudo" id="inicio">
+            <header class="cabecalho">
+                <div class="caminho"><span>PORTÃO</span><b>/</b><strong>CATÁLOGO</strong></div>
+                <div class="controles-tema" aria-label="Comparar propostas de clima">
+                    <a class="opcao-tema" data-opcao-tema="acolhedora" href="?tema=acolhedora">☼ Aconchegante</a>
+                    <a class="opcao-tema" data-opcao-tema="noturna" href="?tema=noturna">☾ Noturna</a>
+                </div>
+            </header>
+
+            <section class="apresentacao" id="entrada" aria-labelledby="titulo-apresentacao">
+                <img class="cena-biblioteca" id="imagemAmbiente" src="assets/biblioteca-acolhedora.png" alt="Biblioteca de castelo em pixel art iluminada por velas">
+                <div class="sombra-cena"></div>
+                <div class="apresentacao-conteudo">
+                    <span class="etiqueta-cena"><i aria-hidden="true">✦</i> UMA BIBLIOTECA PARA EXPLORAR</span>
+                    <h1 id="titulo-apresentacao">Histórias guardadas<br>entre pedra e madeira.</h1>
+                    <p>Um catálogo de livros com atmosfera medieval e jeito simples de usar.</p>
+                    <a class="botao botao-principal" href="#acervo"><span aria-hidden="true">▤</span> Explorar o acervo <span aria-hidden="true">→</span></a>
+                </div>
+                <div class="etiqueta-clima" id="etiquetaClima">DIREÇÃO A · LUZ DE VELA</div>
+            </section>
+
+            <section class="resumo" aria-label="Resumo de exemplo do acervo">
+                <article class="cartao-resumo"><span class="icone-resumo" aria-hidden="true">▤</span><div><small>VOLUMES NO ACERVO</small><strong>03</strong></div><span class="nota-resumo">exemplo</span></article>
+                <article class="cartao-resumo" id="categorias"><span class="icone-resumo verde" aria-hidden="true">✣</span><div><small>CATEGORIAS</small><strong>03</strong></div><span class="nota-resumo">exemplo</span></article>
+                <article class="cartao-resumo" id="autores"><span class="icone-resumo azul" aria-hidden="true">♙</span><div><small>AUTORES</small><strong>04</strong></div><span class="nota-resumo">exemplo</span></article>
+            </section>
+
+            <section class="secao-acervo" id="acervo" aria-labelledby="titulo-acervo">
+                <div class="cabecalho-secao">
+                    <div>
+                        <span class="sobretitulo">O CATÁLOGO</span>
+                        <h2 id="titulo-acervo">Estantes do acervo</h2>
+                    </div>
+                    <button class="botao botao-principal" id="abrirNovoLivro" type="button"><span aria-hidden="true">＋</span> Adicionar livro</button>
+                </div>
+
+                <div class="filtros">
+                    <label class="campo-busca"><span aria-hidden="true">⌕</span><span class="texto-acessivel">Buscar livro ou autor</span><input id="buscarLivro" type="search" placeholder="Buscar por livro ou autor" autocomplete="off"></label>
+                    <label class="campo-categoria"><span class="texto-acessivel">Filtrar por categoria</span><select id="filtrarCategoria"><option value="">Todas as categorias</option><option>Fantasia</option><option>História</option><option>Aventura</option></select></label>
+                    <span class="total-livros"><b id="quantidadeVisivel">03</b> VOLUMES</span>
+                </div>
+
+                <div class="grade-livros" id="gradeLivros">
+                    <article class="cartao-livro" data-categoria="Fantasia" data-busca="as cronicas do reino lia monteiro fantasia">
+                        <div class="capa capa-vinho" aria-hidden="true"><span>✦</span><small>CRÔNICAS<br>DO REINO</small></div>
+                        <div class="livro-conteudo">
+                            <div class="linha-topo"><span class="tag-categoria">FANTASIA</span><span class="ornamento" aria-hidden="true">✣</span></div>
+                            <h3>As Crônicas do Reino</h3>
+                            <p class="autoria">por Lia Monteiro</p>
+                            <p class="resumo-livro">Uma jornada por terras antigas, pactos e castelos esquecidos.</p>
+                            <div class="dados-livro"><span>PREÇO <b>R$ 39,90</b></span><span>QUANTIDADE <b>05</b></span></div>
+                            <button class="link-ficha" type="button" data-livro="0">Ler ficha completa <span aria-hidden="true">→</span></button>
+                        </div>
+                    </article>
+
+                    <article class="cartao-livro" data-categoria="História" data-busca="mapas do mundo antigo caio ferreira historia">
+                        <div class="capa capa-verde" aria-hidden="true"><span>✥</span><small>MAPAS<br>ANTIGOS</small></div>
+                        <div class="livro-conteudo">
+                            <div class="linha-topo"><span class="tag-categoria">HISTÓRIA</span><span class="ornamento" aria-hidden="true">✣</span></div>
+                            <h3>Mapas do Mundo Antigo</h3>
+                            <p class="autoria">por Caio Ferreira</p>
+                            <p class="resumo-livro">Rotas, reinos e caminhos traçados por viajantes de outras eras.</p>
+                            <div class="dados-livro"><span>PREÇO <b>R$ 52,00</b></span><span>QUANTIDADE <b>02</b></span></div>
+                            <button class="link-ficha" type="button" data-livro="1">Ler ficha completa <span aria-hidden="true">→</span></button>
+                        </div>
+                    </article>
+
+                    <article class="cartao-livro" data-categoria="Aventura" data-busca="o bosque das lanternas clara nunes aventura">
+                        <div class="capa capa-azul" aria-hidden="true"><span>☾</span><small>BOSQUE<br>DE LANTERNAS</small></div>
+                        <div class="livro-conteudo">
+                            <div class="linha-topo"><span class="tag-categoria">AVENTURA</span><span class="ornamento" aria-hidden="true">✣</span></div>
+                            <h3>O Bosque das Lanternas</h3>
+                            <p class="autoria">por Clara Nunes e Lia Monteiro</p>
+                            <p class="resumo-livro">Dois viajantes seguem luzes misteriosas através da floresta.</p>
+                            <div class="dados-livro"><span>PREÇO <b>R$ 34,50</b></span><span>QUANTIDADE <b>08</b></span></div>
+                            <button class="link-ficha" type="button" data-livro="2">Ler ficha completa <span aria-hidden="true">→</span></button>
+                        </div>
+                    </article>
+                </div>
+                <p class="mensagem-vazia" id="mensagemVazia" hidden>Nenhum volume encontrado com essa busca.</p>
+            </section>
+
+            <section class="jornada" aria-label="Frames previstos para a experiência">
+                <div class="jornada-titulo"><span class="sobretitulo">TRÊS MOMENTOS</span><h2>Da entrada à ficha do livro</h2></div>
+                <div class="quadros">
+                    <article class="quadro"><span class="quadro-numero">01</span><div class="miniatura mini-portao" aria-hidden="true"><span>▥</span></div><div><h3>Abrir os portões</h3><p>Uma entrada breve apresenta a biblioteca e deixa a pessoa escolher quando avançar.</p></div></article>
+                    <article class="quadro"><span class="quadro-numero">02</span><div class="miniatura mini-estante" aria-hidden="true"><span>▤ ▤ ▤</span></div><div><h3>Explorar as estantes</h3><p>Busca, filtro por categoria e livros organizados como volumes do acervo.</p></div></article>
+                    <article class="quadro"><span class="quadro-numero">03</span><div class="miniatura mini-pergaminho" aria-hidden="true"><span>❧</span></div><div><h3>Ler a ficha</h3><p>Detalhe, preço, quantidade, categoria e autores aparecem numa ficha de pergaminho.</p></div></article>
+                </div>
+            </section>
+
+            <footer class="rodape-pagina"><span>BIBLIOTECA MEDIEVAL</span><span>Rascunho de identidade visual · conteúdo fictício</span></footer>
+        </main>
+    </div>
+
+    <dialog class="dialogo" id="dialogoFicha" aria-labelledby="tituloFicha">
+        <div class="dialogo-cabecalho"><div><span class="sobretitulo">FICHA DO VOLUME</span><h2 id="tituloFicha">Título do livro</h2></div><button class="fechar-dialogo" type="button" data-fechar aria-label="Fechar ficha">×</button></div>
+        <div class="ficha-conteudo">
+            <p class="ficha-autores" id="fichaAutores"></p>
+            <div class="ficha-grade"><div><small>CATEGORIA</small><strong id="fichaCategoria"></strong></div><div><small>PREÇO</small><strong id="fichaPreco"></strong></div><div><small>QUANTIDADE</small><strong id="fichaQuantidade"></strong></div></div>
+            <div class="detalhe-pergaminho"><small>DETALHE DO LIVRO</small><p id="fichaDescricao"></p></div>
+        </div>
+        <div class="acoes-dialogo"><span class="aviso-prototipo">Ações ilustrativas neste mockup</span><button class="botao botao-secundario" type="button" data-fechar>Voltar ao acervo</button></div>
+    </dialog>
+
+    <dialog class="dialogo" id="dialogoNovoLivro" aria-labelledby="tituloNovoLivro">
+        <div class="dialogo-cabecalho"><div><span class="sobretitulo">ADICIONAR AO ACERVO</span><h2 id="tituloNovoLivro">Novo volume</h2></div><button class="fechar-dialogo" type="button" data-fechar aria-label="Fechar formulário">×</button></div>
+        <form class="formulario-mockup" id="formularioLivro">
+            <label>Título<input name="titulo" placeholder="Nome do livro"></label>
+            <div class="formulario-duplo"><label>Preço<input name="preco" type="number" step="0.01" placeholder="0,00"></label><label>Quantidade<input name="quantidade" type="number" min="0" placeholder="0"></label></div>
+            <label>Categoria<select name="categoria"><option>Escolha uma categoria</option><option>Fantasia</option><option>História</option><option>Aventura</option></select></label>
+            <label>Detalhe do livro<textarea name="detalhe" rows="3" placeholder="Uma breve descrição do volume"></textarea></label>
+            <label>Autores<input name="autores" placeholder="Nome de um ou mais autores"></label>
+            <div class="acoes-dialogo"><span class="aviso-prototipo">Prévia visual · não salva dados</span><div><button class="botao botao-secundario" type="button" data-fechar>Cancelar</button> <button class="botao botao-principal" type="submit">Salvar livro</button></div></div>
+        </form>
+    </dialog>
+    <div class="notificacao" id="notificacao" role="status" aria-live="polite"></div>
+    <script src="identidade.js"></script>
+</body>
+</html>

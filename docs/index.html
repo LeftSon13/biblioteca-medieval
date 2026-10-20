@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#17120f">
+    <meta name="description" content="Biblioteca Medieval: atividade de CRUD da UC4 Back-End de Projetos Web, do curso Jovem Programador do Senac SC.">
+    <title>Biblioteca Medieval — Atividade UC4 · Senac SC</title>
+    <link rel="stylesheet" href="site.css">
+</head>
+<body data-tema="vela">
+    <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+
+    <header class="topo">
+        <a class="marca" href="#inicio" aria-label="Biblioteca Medieval, início">
+            <span class="marca-selo" aria-hidden="true">BM</span>
+            <span class="marca-texto"><small>ARQUIVO DO CASTELO</small><strong>BIBLIOTECA MEDIEVAL</strong></span>
+        </a>
+        <nav class="navegacao" aria-label="Navegação principal">
+            <a href="#atividade">A atividade</a>
+            <a href="#como-executar">Como executar</a>
+            <a class="link-codigo" href="https://github.com/LeftSon13/biblioteca-medieval">Código no GitHub</a>
+        </nav>
+        <button class="botao-tema" id="alternarTema" type="button" aria-pressed="false">
+            <span class="sinal-tema" aria-hidden="true"></span>
+            <span id="textoTema">Luz de vela</span>
+        </button>
+    </header>
+
+    <main id="conteudo">
+        <section class="hero" id="inicio" aria-labelledby="titulo">
+            <img class="hero-cenario" id="cenarioHero" src="assets/biblioteca-acolhedora.png" alt="Salão de biblioteca medieval em pixel art, iluminado por velas">
+            <div class="hero-sombra" aria-hidden="true"></div>
+            <div class="hero-grade" aria-hidden="true"></div>
+
+            <div class="hero-conteudo">
+                <p class="sobretitulo"><span></span> CURSO JOVEM PROGRAMADOR · SENAC SC</p>
+                <h1 id="titulo">Biblioteca<br><em>Medieval</em></h1>
+                <p class="contexto">Atividade da <strong>UC4 — Back-End de Projetos Web</strong><br>Instruída pelo professor <strong>Marcos</strong></p>
+                <p class="resumo">Um acervo de livros para praticar cadastro, consulta, atualização e exclusão com Java, Spring Boot, JPA e PostgreSQL.</p>
+                <div class="acoes-hero">
+                    <a class="botao botao-ouro" href="identidade/index.html?tema=acolhedora">
+                        <span class="marca-botao" aria-hidden="true"></span>
+                        Explorar a prévia visual
+                    </a>
+                    <a class="link-texto" href="#atividade">Conhecer a atividade <span aria-hidden="true">↓</span></a>
+                </div>
+                <p class="aviso-visual"><span aria-hidden="true">i</span> Esta página apresenta o projeto. O CRUD completo roda localmente com Docker; veja as instruções abaixo.</p>
+            </div>
+
+            <aside class="cartao-aprendiz" aria-label="Aprendiz do acervo, personagem da biblioteca">
+                <div class="aprendiz-quadro" aria-hidden="true"><span class="aprendiz-sprite"></span></div>
+                <div class="legenda-aprendiz"><small>GUIA DO ACERVO</small><strong>Aprendiz da Biblioteca</strong></div>
+                <span class="brilho-pixel brilho-um" aria-hidden="true"></span>
+                <span class="brilho-pixel brilho-dois" aria-hidden="true"></span>
+            </aside>
+
+            <div class="selo-rodape"><span>PROJETO DE ESTUDO</span><span>JAVA · JPA · POSTGRESQL</span></div>
+            <a class="indicador-rolagem" href="#atividade" aria-label="Rolar para a atividade"><span></span></a>
+        </section>
+
+        <section class="atividade secao" id="atividade" aria-labelledby="tituloAtividade">
+            <div class="cabecalho-secao">
+                <p class="sobretitulo">O QUE ESTAMOS APRENDENDO</p>
+                <h2 id="tituloAtividade">Um catálogo simples,<br><em>com relações entre entidades.</em></h2>
+                <p>A proposta é exercitar o que vimos em aula organizando livros, categorias, detalhes e autores em um banco PostgreSQL.</p>
+            </div>
+
+            <div class="grade-entidades">
+                <article class="cartao-entidade entidade-livro">
+                    <span class="numero-cartao">01</span>
+                    <span class="linha-ornamental" aria-hidden="true"></span>
+                    <h3>Livro</h3>
+                    <p>O registro principal do acervo.</p>
+                    <ul><li>Título</li><li>Preço e quantidade</li><li>Um detalhe por livro</li></ul>
+                </article>
+                <article class="cartao-entidade entidade-categoria">
+                    <span class="numero-cartao">02</span>
+                    <span class="linha-ornamental" aria-hidden="true"></span>
+                    <h3>Categoria</h3>
+                    <p>Ajuda a organizar os volumes.</p>
+                    <ul><li>Uma categoria pode reunir vários livros</li></ul>
+                </article>
+                <article class="cartao-entidade entidade-autores">
+                    <span class="numero-cartao">03</span>
+                    <span class="linha-ornamental" aria-hidden="true"></span>
+                    <h3>Autores</h3>
+                    <p>Relacionamento entre livros e pessoas autoras.</p>
+                    <ul><li>Um livro pode ter vários autores</li><li>Um autor pode escrever vários livros</li></ul>
+                </article>
+                <article class="cartao-entidade entidade-api">
+                    <span class="numero-cartao">04</span>
+                    <span class="linha-ornamental" aria-hidden="true"></span>
+                    <h3>CRUD da API</h3>
+                    <p>Operações para praticar a comunicação web.</p>
+                    <ul><li>Cadastrar e listar</li><li>Atualizar e excluir</li></ul>
+                </article>
+            </div>
+
+            <div class="faixa-tecnologias">
+                <span>JAVA</span><i></i><span>SPRING BOOT</span><i></i><span>JPA</span><i></i><span>POSTGRESQL</span><i></i><span>DOCKER</span>
+            </div>
+        </section>
+
+        <section class="experiencia secao" aria-labelledby="tituloExperiencia">
+            <div class="bloco-arte">
+                <img src="assets/biblioteca-noturna.png" alt="A mesma biblioteca medieval em uma iluminação noturna azulada" loading="lazy">
+                <div class="legenda-arte"><span>DOIS CLIMAS</span><strong>Uma biblioteca para explorar</strong></div>
+            </div>
+            <div class="texto-experiencia">
+                <p class="sobretitulo">A IDENTIDADE VISUAL</p>
+                <h2 id="tituloExperiencia">Uma aventura<br><em>entre livros.</em></h2>
+                <p>A interface combina estantes, personagens e cenas em pixel art com ações claras de catálogo. A luz de vela e a noite azulada mudam o clima sem esconder as informações da atividade.</p>
+                <a class="botao botao-contorno" href="identidade/index.html?tema=noturna">Ver a prévia noturna <span aria-hidden="true">↗</span></a>
+            </div>
+        </section>
+
+        <section class="execucao secao" id="como-executar" aria-labelledby="tituloExecucao">
+            <div class="cabecalho-secao">
+                <p class="sobretitulo">PARA TESTAR O BACKEND COMPLETO</p>
+                <h2 id="tituloExecucao">Abra a biblioteca<br><em>no seu computador.</em></h2>
+                <p>GitHub Pages publica esta apresentação e uma prévia visual com dados fictícios. Para gravar dados e testar o CRUD, rode o PostgreSQL e o Spring Boot localmente.</p>
+            </div>
+            <ol class="passos">
+                <li><span>01</span><div><strong>Instale os requisitos</strong><p>Java 21 e Docker Desktop com Docker Compose.</p></div></li>
+                <li><span>02</span><div><strong>Inicie o PostgreSQL</strong><p>Na pasta do projeto, rode <code>docker compose up -d</code>.</p></div></li>
+                <li><span>03</span><div><strong>Inicie a aplicação</strong><p>Rode <code>.\mvnw.cmd spring-boot:run</code> no Windows.</p></div></li>
+                <li><span>04</span><div><strong>Explore e teste</strong><p>Abra <code>http://localhost:8080</code> e importe a coleção Postman do repositório.</p></div></li>
+            </ol>
+            <div class="nota-persistencia"><span class="ponto-luz" aria-hidden="true"></span><p><strong>Sobre esta demonstração:</strong> os exemplos da prévia são fictícios e não são salvos. O banco real é local e iniciado pelo Docker.</p></div>
+            <a class="botao botao-ouro botao-repositorio" href="https://github.com/LeftSon13/biblioteca-medieval">Abrir repositório e arquivos da atividade <span aria-hidden="true">↗</span></a>
+        </section>
+    </main>
+
+    <footer class="rodape">
+        <a class="marca marca-rodape" href="#inicio">
+            <span class="marca-selo" aria-hidden="true">BM</span>
+            <span class="marca-texto"><small>ATIVIDADE DIDÁTICA</small><strong>JOVEM PROGRAMADOR · SENAC SC</strong></span>
+        </a>
+        <p>UC4 — Back-End de Projetos Web · Professor Marcos</p>
+        <a href="https://github.com/LeftSon13/biblioteca-medieval">Código-fonte no GitHub</a>
+    </footer>
+
+    <script src="site.js"></script>
+</body>
+</html>

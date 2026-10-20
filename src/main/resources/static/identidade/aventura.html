@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#160f12">
+    <title>Biblioteca Medieval — aventura interativa</title>
+    <link rel="stylesheet" href="aventura.css">
+</head>
+<body data-tema="acolhedora">
+    <svg class="biblioteca-icones" aria-hidden="true" focusable="false">
+        <symbol id="icone-escudo" viewBox="0 0 16 16"><path fill="#28180f" d="M2 1h12v2h2v7h-1v2h-2v2h-3v2H6v-2H3v-2H1v-2H0V3h2z"/><path fill="#bd8739" d="M3 3h10v7h-2v2H9v2H7v-2H5v-2H3z"/><path fill="#f5dfa0" d="M5 5h2v1h2V5h2v4h-1v2H9v-2H7v2H6V9H5z"/><path fill="#fff4d2" d="M6 6h1v2H6zm4 0h1v2h-1z"/></symbol>
+        <symbol id="icone-estante" viewBox="0 0 16 16"><path fill="#28180f" d="M1 1h14v2h1v1h-1v7h1v2H1v-2h1V4H1V3h1V1zm1 12h12v2H2z"/><path fill="#d8a24e" d="M3 4h10v1H3zm0 6h10v1H3z"/><path fill="#9f4936" d="M3 5h2v4H3z"/><path fill="#f0d188" d="M3 5h2v1H3z"/><path fill="#527b73" d="M6 4h2v5H6z"/><path fill="#f3d997" d="M6 4h2v1H6z"/><path fill="#8b5c9a" d="M9 5h2v4H9z"/><path fill="#f0d188" d="M9 5h2v1H9z"/><path fill="#d8a24e" d="M12 4h1v5h-1z"/></symbol>
+        <symbol id="icone-pena" viewBox="0 0 16 16"><path fill="#28180f" d="M12 1h3v3h-1v2h-1v2h-1v2h-1v2H9v1H7v2H4v-3h2v-2h1V8h1V6h1V4h1V3h1zM2 12h4v2H4v1H2z"/><path fill="#c78d3f" d="M12 3h1v2h-1v2h-1v2h-1v2H9v1H7v1H5v-1h1v-2h1V8h1V6h1V5h1V4h1z"/><path fill="#f8e7b5" d="M12 4v2h-1v2h-1v2H9v2H8v-2h1v-2h1V6h1V4z"/><path fill="#6e3528" d="M3 12h3v1H4v2H2z"/></symbol>
+        <symbol id="icone-livro" viewBox="0 0 16 16"><path fill="#28180f" d="M1 2h5l2 2 2-2h5v12h-5l-2 1-2-1H1z"/><path fill="#f1dfb9" d="M3 4h3l2 2v7l-2-1H3zm10 0h-3L8 6v7l2-1h3z"/><path fill="#c18a3e" d="M7 5h2v8H7z"/><path fill="#fff2d0" d="M4 5h2v1H4zm6 0h2v1h-2zM4 7h2v1H4zm6 0h2v1h-2z"/><path fill="#6b3922" d="M2 3h4v1H3v8H2zm8 0h4v1h-3v8h-1z"/></symbol>
+        <symbol id="icone-livro-fechado" viewBox="0 0 16 16"><path fill="#28180f" d="M3 1h10v2h2v10h-2v2H3v-2H1V3h2z"/><path fill="#8f3d36" d="M4 3h8v10H4z"/><path fill="#c58d3e" d="M5 3h2v10H5zm5 2h2v1h-2zm0 5h2v1h-2z"/><path fill="#f4dfa4" d="M8 5h2v1H8zm0 5h2v1H8z"/></symbol>
+        <symbol id="icone-sol" viewBox="0 0 16 16"><path fill="#28180f" d="M6 0h4v3h2v2h3v4h-3v2h-2v3H6v-3H4V9H1V5h3V3h2zM1 1h3v2H1zm11 0h3v2h-3zM1 12h3v3H1zm11 0h3v3h-3z"/><path fill="#d89d43" d="M7 1h2v3h2v2h3v2h-3v2H9v3H7v-3H5V8H2V6h3V4h2z"/><path fill="#fff0bd" d="M6 6h4v1h1v2h-1v1H6V9H5V7h1z"/><path fill="#f1c76c" d="M7 7h2v2H7z"/></symbol>
+        <symbol id="icone-lua" viewBox="0 0 16 16"><path fill="#28180f" d="M10 1h3v2h2v3h1v5h-2v2h-3v2H7v-2H4v-2H3V7h2V4h2V2h3z"/><path fill="#527391" d="M10 3h2v2h2v5h-2v2H8v-2H6V6h2V4h2z"/><path fill="#c79348" d="M10 2h2v2h2v2h-2V5h-2V4H8V3h2z"/><path fill="#f5e1a8" d="M10 4h1v2h2v1h-2v2h-1V7H8V6h2z"/><path fill="#fff0bd" d="M4 3h1v1H4zm1 9h1v1H5z"/></symbol>
+        <symbol id="icone-busca" viewBox="0 0 16 16"><path fill="#28180f" d="M5 1h5v1h2v2h1v5h-1v2h-2v1H6v-1H4V9H3V4h1V2h1zm6 9h2v2h-2zm2 2h2v2h-2z"/><path fill="#c58b3e" d="M6 3h4v1h2v4h-1v2H6V9H5V5h1z"/><path fill="#fff0bd" d="M6 4h3v1H6zm-1 2h1v2H5z"/><path fill="#6e4c2f" d="M11 10h2v2h-2zm2 2h2v2h-2z"/></symbol>
+        <symbol id="icone-autor" viewBox="0 0 16 16"><path fill="#28180f" d="M6 1h4v1h2v2h1v4h-1v2h-2v1h4v2h1v2H1v-2h1v-2h4v-1H4v-2H3V4h1V2h2z"/><path fill="#c58b3e" d="M6 3h4v1h1v4h-1v1H6V8H5V4h1z"/><path fill="#f2d9a0" d="M7 4h2v1H7zM6 7h1v1h1v1H6z"/><path fill="#843f36" d="M4 12h2v-1h4v1h2v2H4z"/><path fill="#e7bd68" d="M7 11h2v1H7z"/></symbol>
+        <symbol id="icone-editar" viewBox="0 0 16 16"><path fill="#28180f" d="M11 1h3v1h1v3h-1v1h-1v1h-1v1h-1v1h-1v1H9v1H8v1H6v1H4v1H1v-4h2v-2h1V7h1V6h1V5h1V4h1V3h1V2h1z"/><path fill="#c68c3c" d="M11 3h2v2h-1v1h-1v1h-1v1H9v1H8v1H7v1H5v1H3v-2h1v-1h1V8h1V7h1V6h1V5h1V4h1z"/><path fill="#fff0bd" d="M11 4h1v1h-1zm-2 2h1v1H9zM7 8h1v1H7zM5 10h1v1H5z"/><path fill="#e3c887" d="M2 13h2v1H2z"/></symbol>
+        <symbol id="icone-excluir" viewBox="0 0 16 16"><path fill="#28180f" d="M5 1h6v1h2v2h2v2H1V4h2V2h2zm-2 6h10v7h-1v1H4v-1H3z"/><path fill="#a7443a" d="M4 7h8v6H4z"/><path fill="#e5b15e" d="M4 4h8v1H4zm2-2h4v1H6z"/><path fill="#f4d9a1" d="M6 8h1v4H6zm3 0h1v4H9z"/></symbol>
+        <symbol id="icone-seta-direita" viewBox="0 0 16 16"><path fill="#28180f" d="M7 1h3v2h2v2h2v2h2v3h-2v2h-2v2h-2v2H7v-3h2v-2H1V7h8V5H7z"/><path fill="#d5a04b" d="M8 3h1v2h2v2h2v2h-2v2H9v2H8v-2h2V9H2V8h8V6H8z"/><path fill="#fff0bd" d="M3 8h7v1H3z"/></symbol>
+        <symbol id="icone-seta-esquerda" viewBox="0 0 16 16"><path fill="#28180f" d="M9 1h-3v2H4v2H2v2H0v3h2v2h2v2h2v2h3v-3H7v-2h8V7H7V5h2z"/><path fill="#d5a04b" d="M8 3H7v2H5v2H3v2h2v2h2v2h1v-2H6V9h8V8H6V6h2z"/><path fill="#fff0bd" d="M13 8H6v1h7z"/></symbol>
+        <symbol id="icone-pausa" viewBox="0 0 16 16"><path fill="#28180f" d="M2 1h5v1h1v12H7v1H2v-1H1V2h1zm7 0h5v1h1v12h-1v1H9v-1H8V2h1z"/><path fill="#d7a34d" d="M3 3h3v10H3zm7 0h3v10h-3z"/><path fill="#fff0bd" d="M3 3h1v10H3zm7 0h1v10h-1z"/></symbol>
+        <symbol id="icone-reproduzir" viewBox="0 0 16 16"><path fill="#28180f" d="M2 1h3v2h2v2h2v2h2v2h2v2h-2v2h-2v1H7v1H4v-2H2z"/><path fill="#d7a34d" d="M4 3h1v2h2v2h2v2h2v1H9v2H7v1H5v-2H4z"/><path fill="#fff0bd" d="M4 3h1v7H4z"/></symbol>
+        <symbol id="icone-fechar" viewBox="0 0 16 16"><path fill="#28180f" d="M3 1h3v2h1v1h2V3h1V1h3v3h-2v1h-1v2h1v1h2v3h-3v-2h-1V8H7v1H6v2H3V8h2V7h1V5H5V4H3z"/><path fill="#c58b3e" d="M4 2h1v2h2v2h2V4h2V2h1v1h-1v2h-2v2h2v2h1v1h-1V9h-2V7H7v2H5v1H4V9h1V8h2V6H5V4H4z"/><path fill="#fff0bd" d="M6 5h1v1H6zm3 3h1v1H9z"/></symbol>
+    </svg>
+    <main class="jogo" id="jogo">
+        <section class="tela tela-entrada" id="telaEntrada" aria-labelledby="tituloEntrada">
+            <img class="imagem-cenario" id="imagemPortao" src="assets/portao-acolhedor.png" alt="Portão de madeira de uma biblioteca medieval em arte pixelada">
+            <div class="camada-luz" aria-hidden="true"></div>
+            <div class="poeira" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+            <header class="hud hud-entrada">
+                <a class="selo-marca" href="#telaEntrada" aria-label="Biblioteca Medieval">
+                    <span class="brasao" aria-hidden="true"><svg viewBox="0 0 16 16" class="icone-pixel"><use href="#icone-escudo"></use></svg></span>
+                    <span><small>ARQUIVO DO CASTELO</small><strong>BIBLIOTECA MEDIEVAL</strong></span>
+                </a>
+                <div class="troca-clima" aria-label="Comparar direção de iluminação">
+                    <a data-clima="acolhedora" href="?tema=acolhedora"><svg class="icone-pixel" aria-hidden="true"><use href="#icone-sol"></use></svg> LUZ DE VELA</a>
+                    <a data-clima="noturna" href="?tema=noturna"><svg class="icone-pixel" aria-hidden="true"><use href="#icone-lua"></use></svg> NOITE AZUL</a>
+                </div>
+                <button class="botao-hud controle-movimento" type="button" data-controle-movimento aria-pressed="false" aria-label="Pausar animações"><svg class="icone-pixel icone-pausa" aria-hidden="true"><use href="#icone-pausa"></use></svg><span class="texto-pausa">PAUSAR</span></button>
+            </header>
+
+            <div class="titulo-aventura">
+                <span class="capitulo"><i></i> UMA AVENTURA ENTRE LIVROS <i></i></span>
+                <h1 id="tituloEntrada">Biblioteca<br><em>Medieval</em></h1>
+                <p>O portão está fechado. O conhecimento espera do outro lado.</p>
+            </div>
+
+            <div class="marcador-portao" aria-hidden="true"><span>PORTÃO DO ACERVO</span><i></i></div>
+            <div class="sprite-personagem personagem-entrada" id="aprendizEntrada" role="img" aria-label="Aprendiz da biblioteca caminhando com um livro"></div>
+
+            <div class="caixa-dialogo entrada-dialogo">
+                <div class="retrato-personagem" aria-hidden="true"><span>✦</span></div>
+                <div class="fala">
+                    <strong>APRENDIZ DO ACERVO <span>· NÍVEL 1</span></strong>
+                    <p>“Dizem que todo livro guarda uma porta. Vamos descobrir?”</p>
+                </div>
+                <div class="acoes-entrada">
+                    <button class="botao-jogo botao-dourado" id="abrirPortoes" type="button"><svg class="icone-pixel" aria-hidden="true"><use href="#icone-reproduzir"></use></svg> Abrir os portões</button>
+                    <button class="botao-texto" id="pularEntrada" type="button">Entrar direto <svg class="icone-pixel" aria-hidden="true"><use href="#icone-seta-direita"></use></svg></button>
+                </div>
+            </div>
+            <div class="versao-frame">FRAME 01 <b>·</b> A ENTRADA</div>
+        </section>
+
+        <section class="tela tela-sala" id="telaSala" aria-labelledby="tituloSala" hidden>
+            <img class="imagem-cenario" id="imagemSala" src="assets/biblioteca-acolhedora.png" alt="Interior de biblioteca de castelo em pixel art, com estantes, mesa de leitura e velas">
+            <div class="camada-sala" aria-hidden="true"></div>
+            <div class="fachos-luz" aria-hidden="true"><i></i><i></i></div>
+            <div class="poeira poeira-sala" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="brasas-cena" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+            <header class="hud hud-sala">
+                <a class="selo-marca" href="#telaSala" aria-label="Biblioteca Medieval, salão principal">
+                    <span class="brasao" aria-hidden="true"><svg viewBox="0 0 16 16" class="icone-pixel"><use href="#icone-escudo"></use></svg></span>
+                    <span><small>CAPÍTULO 01 · SALÃO PRINCIPAL</small><strong id="tituloSala">A BIBLIOTECA</strong></span>
+                </a>
+                <div class="hud-acoes">
+                    <div class="troca-clima compacta" aria-label="Comparar direção de iluminação">
+                    <a data-clima="acolhedora" href="?tema=acolhedora"><svg class="icone-pixel" aria-hidden="true"><use href="#icone-sol"></use></svg> VELA</a>
+                    <a data-clima="noturna" href="?tema=noturna"><svg class="icone-pixel" aria-hidden="true"><use href="#icone-lua"></use></svg> NOITE</a>
+                    </div>
+                    <button class="botao-hud controle-movimento" type="button" data-controle-movimento aria-pressed="false" aria-label="Pausar animações"><svg class="icone-pixel icone-pausa" aria-hidden="true"><use href="#icone-pausa"></use></svg><span class="texto-pausa">PAUSAR</span></button>
+                    <button class="botao-hud" id="voltarEntrada" type="button"><svg class="icone-pixel" aria-hidden="true"><use href="#icone-seta-esquerda"></use></svg> PORTÃO</button>
+                </div>
+            </header>
+
+            <div class="localizacao"><span class="ponto-pulsante"></span> SALÃO DE LEITURA <b>·</b> <span id="totalLivrosSala">0</span> TOMOS <b>·</b> <span id="totalCategoriasSala">0</span> CATEGORIAS</div>
+
+            <button class="ponto-interacao ponto-estantes" id="examinarEstantes" type="button" aria-label="Examinar as estantes e abrir o catálogo">
+                <span class="alvo-pixel" aria-hidden="true"><svg viewBox="0 0 16 16" class="icone-pixel"><use href="#icone-estante"></use></svg></span>
+                <span class="legenda-alvo"><small>INTERAGIR</small><strong>ESTANTES DO ACERVO</strong><em>Abrir catálogo <kbd>E</kbd></em></span>
+            </button>
+            <button class="ponto-interacao ponto-mesa" id="registrarNaMesa" type="button" aria-label="Registrar um novo livro na mesa do escrivão">
+                <span class="alvo-pixel" aria-hidden="true"><svg viewBox="0 0 16 16" class="icone-pixel"><use href="#icone-pena"></use></svg></span>
+                <span class="legenda-alvo"><small>INTERAGIR</small><strong>MESA DO ESCRIVÃO</strong><em>Novo livro <kbd>R</kbd></em></span>
+            </button>
+
+            <button class="personagem-sala botao-aprendiz" id="falarAprendiz" type="button" aria-label="Conversar com o aprendiz da biblioteca" aria-describedby="falaSala" title="Conversar com o aprendiz" data-dica="CONVERSAR">
+                <span class="sombra-aprendiz" aria-hidden="true"></span>
+                <span class="aprendiz-direcao" aria-hidden="true"><span class="aprendiz-vida"><span class="aprendiz-quadros" id="corpoAprendiz"></span></span></span>
+            </button>
+            <div class="caixa-dialogo fala-sala">
+                <div class="retrato-personagem" aria-hidden="true"><span>✦</span></div>
+                <div class="fala"><strong>APRENDIZ DO ACERVO</strong><p id="falaSala" aria-live="polite">“As estantes estão à sua espera. Escolha um livro ou registre um novo volume.”</p></div>
+                <div class="comandos-sala">
+                    <button class="botao-jogo botao-dourado" id="abrirAcervo" type="button"><svg class="icone-pixel" aria-hidden="true"><use href="#icone-livro"></use></svg> Ver o acervo</button>
+                    <button class="botao-jogo botao-madeira" id="abrirCadastro" type="button"><svg class="icone-pixel" aria-hidden="true"><use href="#icone-pena"></use></svg> Registrar livro</button>
+                    <button class="botao-atalho" id="abrirIndices" type="button"><svg class="icone-pixel" aria-hidden="true"><use href="#icone-autor"></use></svg> AUTORES & CATEGORIAS</button>
+                </div>
+            </div>
+            <div class="versao-frame">FRAME 02 <b>·</b> O SALÃO</div>
+        </section>
+
+        <section class="camada-acervo" id="telaAcervo" aria-labelledby="tituloAcervo" hidden>
+            <img class="fundo-inventario" id="imagemAcervo" src="assets/biblioteca-acolhedora.png" alt="">
+            <div class="mascara-inventario" aria-hidden="true"></div>
+            <div class="janela-inventario">
+                <div class="moldura-canto canto-tl" aria-hidden="true"></div><div class="moldura-canto canto-tr" aria-hidden="true"></div>
+                <div class="moldura-canto canto-bl" aria-hidden="true"></div><div class="moldura-canto canto-br" aria-hidden="true"></div>
+                <header class="topo-inventario">
+                    <div class="titulo-inventario"><span class="icone-livro-aberto" aria-hidden="true"><svg class="icone-pixel"><use href="#icone-livro"></use></svg></span><div><small>VOLUME I · CATÁLOGO</small><h2 id="tituloAcervo">As estantes do castelo</h2></div></div>
+                    <button class="botao-fechar-tela" id="fecharAcervo" type="button"><svg class="icone-pixel" aria-hidden="true"><use href="#icone-seta-esquerda"></use></svg> VOLTAR AO SALÃO</button>
+                </header>
+
+                <div class="barra-inventario">
+                    <div class="inventario-intro"><span class="etiqueta-pixel">ITENS REGISTRADOS</span><strong><b id="livrosVisiveis">00</b> TOMOS</strong></div>
+                    <label class="busca-inventario"><svg class="icone-pixel" aria-hidden="true"><use href="#icone-busca"></use></svg><span class="texto-sr">Buscar livro ou autor</span><input id="buscarLivro" type="search" placeholder="Buscar título ou autor..."></label>
+                    <label class="filtro-inventario"><span class="texto-sr">Filtrar livros por categoria</span><select id="filtrarCategoria"><option value="">TODAS AS CATEGORIAS</option></select></label>
+                    <button class="botao-jogo botao-dourado botao-novo" id="novoTomo" type="button"><svg class="icone-pixel" aria-hidden="true"><use href="#icone-pena"></use></svg> NOVO TOMO</button>
+                </div>
+
+                <div class="lista-tomos" id="listaTomos" aria-live="polite"></div>
+                <div class="sem-tomos" id="semTomos" hidden><span class="estante-vazia" aria-hidden="true"></span><span id="mensagemSemTomos">As estantes não encontraram nenhum tomo com esse nome.</span></div>
+                <p class="estado-api" id="estadoApi" role="status" hidden></p><button class="botao-jogo botao-madeira tentar-api" id="tentarCarregar" type="button" hidden>TENTAR NOVAMENTE</button>
+                <footer class="rodape-inventario"><span><i></i> BUSCA RÁPIDA <kbd>CTRL</kbd> + <kbd>F</kbd></span><span>SELECIONE UMA CAPA PARA LER SUA FICHA</span></footer>
+            </div>
+        </section>
+    </main>
+
+    <dialog class="livro-dialogo" id="dialogoLivro" aria-labelledby="detalheTitulo">
+        <div class="livro-aberto-arte" aria-hidden="true"><div class="pagina pagina-esquerda"></div><div class="pagina pagina-direita"></div><div class="centro-livro"></div><div class="selo-livro">✦</div><div class="sprite-personagem personagem-ficha" id="aprendizFicha"></div></div>
+        <div class="detalhe-livro">
+            <header class="cabecalho-detalhe"><div><span class="etiqueta-pixel">REGISTRO DO ACERVO</span><h2 id="detalheTitulo">Título do livro</h2></div><button class="fechar-livro" type="button" data-fechar-livro aria-label="Fechar ficha"><svg class="icone-pixel" aria-hidden="true"><use href="#icone-fechar"></use></svg></button></header>
+            <p class="assinatura-livro" id="detalheAutores"></p>
+            <div class="atributos-livro"><div><small>CATEGORIA</small><strong id="detalheCategoria"></strong></div><div><small>PREÇO</small><strong id="detalhePreco"></strong></div><div><small>QUANTIDADE</small><strong id="detalheQuantidade"></strong></div></div>
+            <div class="texto-pergaminho"><span>DETALHE DO LIVRO</span><p id="detalheDescricao"></p></div>
+            <div class="acoes-livro"><button class="botao-jogo botao-madeira" id="editarLivro" type="button"><svg class="icone-pixel" aria-hidden="true"><use href="#icone-editar"></use></svg> EDITAR REGISTRO</button><button class="botao-jogo botao-perigo" id="excluirLivro" type="button"><svg class="icone-pixel" aria-hidden="true"><use href="#icone-excluir"></use></svg> EXCLUIR</button><button class="botao-texto" type="button" data-fechar-livro>Fechar ficha</button></div>
+        </div>
+    </dialog>
+
+    <dialog class="form-dialogo" id="dialogoFormulario" aria-labelledby="tituloFormulario">
+        <form id="formularioLivro">
+            <span class="sprite-personagem escriba-dialogo" id="aprendizFormulario" aria-hidden="true"></span>
+            <header class="cabecalho-detalhe"><div><span class="etiqueta-pixel">MESA DO ESCRIVÃO</span><h2 id="tituloFormulario">Registrar novo volume</h2></div><button class="fechar-livro" type="button" data-fechar-form aria-label="Fechar formulário"><svg class="icone-pixel" aria-hidden="true"><use href="#icone-fechar"></use></svg></button></header>
+            <p class="texto-ajuda">Preencha o registro para guardar este livro no acervo.</p>
+            <p class="erro-operacao" id="erroFormulario" role="alert" hidden></p>
+            <label class="campo-formulario">TÍTULO DO LIVRO<input name="titulo" required maxlength="120" placeholder="Ex.: As Crônicas do Reino"></label>
+            <div class="duas-colunas"><label class="campo-formulario">PREÇO<input name="preco" type="number" min="0" step="0.01" required placeholder="0,00"></label><label class="campo-formulario">QUANTIDADE<input name="quantidade" type="number" min="0" required placeholder="0"></label></div>
+            <div class="campo-formulario"><label for="categoriaLivro">CATEGORIA</label><div class="campo-com-acao acao-categoria"><select id="categoriaLivro" name="categoriaId" required><option value="">Escolha uma categoria</option></select><input id="novaCategoria" maxlength="80" placeholder="Nova categoria" aria-label="Nome da nova categoria"><button class="botao-jogo botao-madeira" id="cadastrarCategoria" type="button" aria-label="Cadastrar categoria"><svg class="icone-pixel" aria-hidden="true"><use href="#icone-livro-fechado"></use></svg></button></div><small class="ajuda-campo">Cadastre uma categoria ou escolha uma já existente.</small></div>
+            <label class="campo-formulario">DETALHE DO LIVRO<textarea name="detalhe" required maxlength="1000" rows="3" placeholder="O que torna este volume especial?"></textarea></label>
+            <fieldset class="campo-formulario grupo-autores"><legend>AUTORES <small>(selecione um ou mais)</small></legend><div id="listaAutores" class="lista-autores"><p class="ajuda-campo">Carregando autores...</p></div><div class="campo-com-acao acao-autor"><input id="novoAutor" maxlength="120" placeholder="Nome do novo autor" aria-label="Nome do novo autor"><button class="botao-jogo botao-madeira" id="cadastrarAutor" type="button"><svg class="icone-pixel" aria-hidden="true"><use href="#icone-autor"></use></svg> CADASTRAR</button></div></fieldset>
+            <footer class="rodape-formulario"><span>OS DADOS SÃO SALVOS NO BANCO</span><div><button class="botao-jogo botao-madeira" type="button" data-fechar-form>Cancelar</button><button class="botao-jogo botao-dourado" type="submit">Guardar no acervo</button></div></footer>
+        </form>
+    </dialog>
+
+    <dialog class="indice-dialogo" id="dialogoIndices" aria-labelledby="tituloIndices">
+        <header class="cabecalho-detalhe"><div><span class="etiqueta-pixel">ÍNDICE DO CASTELO</span><h2 id="tituloIndices">Autores e categorias</h2></div><button class="fechar-livro" type="button" data-fechar-indice aria-label="Fechar índice"><svg class="icone-pixel" aria-hidden="true"><use href="#icone-fechar"></use></svg></button></header>
+        <div class="colunas-indice"><section><h3><svg class="icone-pixel" aria-hidden="true"><use href="#icone-livro-fechado"></use></svg> CATEGORIAS</h3><div id="indiceCategorias"><p>Carregando...</p></div></section><section><h3><svg class="icone-pixel" aria-hidden="true"><use href="#icone-autor"></use></svg> AUTORES</h3><div id="indiceAutores"><p>Carregando...</p></div></section></div>
+        <p class="nota-indice">Os nomes exibidos vêm do banco de dados. Categorias e autores podem ser cadastrados na mesa do escrivão.</p>
+    </dialog>
+
+    <dialog class="confirmar-dialogo" id="dialogoExcluir" aria-labelledby="tituloExcluir">
+        <span class="alerta-pixel" aria-hidden="true">!</span><span class="etiqueta-pixel">ATENÇÃO, APRENDIZ</span><h2 id="tituloExcluir">Retirar este livro do acervo?</h2><p>O registro e o detalhe associado serão removidos do banco.</p><p class="erro-operacao" id="erroExclusao" role="alert" hidden></p><div><button class="botao-jogo botao-madeira" type="button" data-cancelar-exclusao>Manter o livro</button><button class="botao-jogo botao-perigo" id="confirmarExclusao" type="button">Confirmar exclusão</button></div>
+    </dialog>
+    <div class="notificacao" id="notificacao" role="status" aria-live="polite"><span class="sprite-notificacao" aria-hidden="true"></span><span id="textoNotificacao"></span></div>
+    <script src="aventura.js"></script>
+</body>
+</html>

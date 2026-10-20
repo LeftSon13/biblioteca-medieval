@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#201b1a">
+    <title>Biblioteca Medieval</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="app-shell">
+        <aside class="sidebar">
+            <a class="marca" href="#inicio" aria-label="Biblioteca Medieval, início">
+                <span class="marca-icone" aria-hidden="true">✦</span>
+                <span class="marca-texto">BIBLIOTECA<span>MEDIEVAL</span></span>
+            </a>
+
+            <div class="menu-legenda">ARQUIVO REAL</div>
+            <nav class="menu-principal" aria-label="Navegação principal">
+                <a class="item-menu selecionado" href="#inicio"><span aria-hidden="true">▤</span> Estante</a>
+                <a class="item-menu" href="#catalogo"><span aria-hidden="true">✎</span> Catálogo</a>
+            </nav>
+
+            <div class="aviso-reino">
+                <span class="sinal-luz" aria-hidden="true"></span>
+                <div><strong>Arquivo conectado</strong><small>PostgreSQL do reino</small></div>
+            </div>
+
+            <div class="rodape-lateral">
+                <div class="pixel-coroa" aria-hidden="true">♛</div>
+                <p>Conhecimento é poder.<br>Cuide bem dos tomos.</p>
+                <small>EDIÇÃO DO ESCRIBA · 2026</small>
+            </div>
+        </aside>
+
+        <main class="conteudo" id="inicio">
+            <header class="barra-superior">
+                <div class="caminho"><span>REINO</span><b>/</b><strong>ACERVO</strong></div>
+                <div class="acoes-superiores">
+                    <span class="status-online"><span class="sinal-luz"></span> SISTEMA ATIVO</span>
+                    <button class="botao botao-dourado" id="abrirNovoLivro" type="button">
+                        <span aria-hidden="true">＋</span> Novo livro
+                    </button>
+                </div>
+            </header>
+
+            <section class="apresentacao" aria-labelledby="tituloPagina">
+                <div class="apresentacao-texto">
+                    <div class="etiqueta"><span aria-hidden="true">✦</span> SALÃO DO CONHECIMENTO</div>
+                    <h1 id="tituloPagina">A grande<br><em>estante real</em></h1>
+                    <p>Registre e organize os volumes guardados no reino.</p>
+                </div>
+                <div class="arte-castelo" aria-hidden="true">
+                    <div class="lua-pixel"></div>
+                    <div class="torre torre-esquerda"><i></i></div>
+                    <div class="torre torre-centro"><i></i></div>
+                    <div class="torre torre-direita"><i></i></div>
+                    <div class="muralha"></div>
+                    <div class="portao"></div>
+                    <div class="estrela estrela-um">✦</div>
+                    <div class="estrela estrela-dois">✧</div>
+                </div>
+            </section>
+
+            <section class="resumo" aria-label="Resumo do acervo">
+                <article class="cartao-resumo">
+                    <span class="resumo-icone icone-livros" aria-hidden="true">▤</span>
+                    <div><small>VOLUMES NO ACERVO</small><strong id="totalLivros">0</strong></div>
+                    <span class="resumo-detalhe">livros registrados</span>
+                </article>
+                <article class="cartao-resumo">
+                    <span class="resumo-icone icone-categorias" aria-hidden="true">⚑</span>
+                    <div><small>CATEGORIAS</small><strong id="totalCategorias">0</strong></div>
+                    <span class="resumo-detalhe">seções da estante</span>
+                </article>
+                <article class="cartao-resumo">
+                    <span class="resumo-icone icone-estoque" aria-hidden="true">▣</span>
+                    <div><small>ITENS EM ESTOQUE</small><strong id="totalEstoque">0</strong></div>
+                    <span class="resumo-detalhe">unidades disponíveis</span>
+                </article>
+            </section>
+
+            <section class="catalogo" id="catalogo" aria-labelledby="tituloAcervo">
+                <div class="titulo-secao">
+                    <div>
+                        <div class="etiqueta etiqueta-escura">CATÁLOGO</div>
+                        <h2 id="tituloAcervo">Livros do reino</h2>
+                    </div>
+                    <span class="contador" id="contadorResultados">0 registros</span>
+                </div>
+
+                <div class="filtros">
+                    <label class="busca">
+                        <span aria-hidden="true">⌕</span>
+                        <input id="campoBusca" type="search" placeholder="Buscar título ou autor..." aria-label="Buscar título ou autor">
+                    </label>
+                    <label class="filtro-categoria">
+                        <span class="texto-leitor">Filtrar por categoria</span>
+                        <select id="filtroCategoria" aria-label="Filtrar por categoria">
+                            <option value="">Todas as categorias</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div id="mensagemPagina" class="mensagem-pagina" role="status" aria-live="polite" hidden></div>
+                <div class="grade-livros" id="listaLivros"></div>
+            </section>
+
+            <footer class="rodape-conteudo">
+                <span>✦ BIBLIOTECA MEDIEVAL</span>
+                <span>Feito para guardar histórias e conhecimento</span>
+            </footer>
+        </main>
+    </div>
+
+    <dialog class="dialogo" id="dialogoLivro" aria-labelledby="tituloDialogo">
+        <div class="dialogo-cabecalho">
+            <div>
+                <div class="etiqueta etiqueta-escura">REGISTRO DO ACERVO</div>
+                <h2 id="tituloDialogo">Cadastrar novo livro</h2>
+            </div>
+            <button class="botao-fechar" id="fecharDialogo" type="button" aria-label="Fechar formulário">×</button>
+        </div>
+
+        <form id="formularioLivro">
+            <input id="livroId" type="hidden">
+            <div class="campos-duplos">
+                <label class="campo campo-largo">Título do livro
+                    <input id="tituloLivro" name="titulo" maxlength="180" required>
+                </label>
+                <label class="campo">Preço (R$)
+                    <input id="precoLivro" name="preco" type="number" min="0" step="0.01" required>
+                </label>
+                <label class="campo">Quantidade
+                    <input id="quantidadeLivro" name="quantidade" type="number" min="0" step="1" required>
+                </label>
+            </div>
+
+            <div class="campo campo-categoria">
+                <label for="categoriaLivro">Categoria</label>
+                <div class="linha-acao">
+                    <select id="categoriaLivro" required>
+                        <option value="">Escolha uma categoria</option>
+                    </select>
+                    <button class="botao botao-secundario" id="alternarNovaCategoria" type="button">＋ Nova</button>
+                </div>
+                <div class="mini-formulario" id="campoNovaCategoria" hidden>
+                    <input id="nomeNovaCategoria" maxlength="80" placeholder="Nome da categoria" aria-label="Nome da nova categoria">
+                    <button class="botao botao-pequeno botao-verde" id="salvarNovaCategoria" type="button">Adicionar</button>
+                </div>
+            </div>
+
+            <div class="campo">
+                <div class="rotulo-com-acao">
+                    <span>Autores</span>
+                    <button class="link-acao" id="alternarNovoAutor" type="button">＋ Cadastrar autor</button>
+                </div>
+                <div class="mini-formulario mini-formulario-autor" id="campoNovoAutor" hidden>
+                    <input id="nomeNovoAutor" maxlength="120" placeholder="Nome do autor" aria-label="Nome do novo autor">
+                    <button class="botao botao-pequeno botao-verde" id="salvarNovoAutor" type="button">Adicionar</button>
+                </div>
+                <div class="lista-autores" id="listaAutores"></div>
+                <small class="ajuda-campo">Você pode selecionar mais de um autor.</small>
+            </div>
+
+            <label class="campo">Detalhe do livro
+                <textarea id="descricaoLivro" rows="3" maxlength="1000" placeholder="Uma breve descrição do volume..." required></textarea>
+                <small class="ajuda-campo">Campo de descrição usado para representar o detalhe solicitado na atividade.</small>
+            </label>
+
+            <div class="rodape-formulario">
+                <button class="botao botao-perigo" id="excluirLivro" type="button" hidden>Excluir livro</button>
+                <div class="acoes-formulario">
+                    <button class="botao botao-secundario" id="cancelarDialogo" type="button">Cancelar</button>
+                    <button class="botao botao-dourado" id="salvarLivro" type="submit">Salvar no acervo</button>
+                </div>
+            </div>
+        </form>
+    </dialog>
+
+    <div class="notificacao" id="notificacao" role="status" aria-live="polite"></div>
+    <script src="/app.js" defer></script>
+</body>
+</html>

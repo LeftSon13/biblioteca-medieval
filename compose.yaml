@@ -1,0 +1,22 @@
+services:
+  banco:
+    image: postgres:17
+    container_name: biblioteca-medieval-postgres
+    environment:
+      POSTGRES_DB: biblioteca_medieval
+      POSTGRES_USER: ${DB_USERNAME:-biblioteca}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-biblioteca}
+    ports:
+      - "127.0.0.1:55436:5432"
+    volumes:
+      - dados_postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$$POSTGRES_USER\" -d \"$$POSTGRES_DB\""]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+volumes:
+  dados_postgres:
+    name: biblioteca-medieval-dados
